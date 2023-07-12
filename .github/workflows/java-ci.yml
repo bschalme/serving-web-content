@@ -1,5 +1,5 @@
 name: Java CI
-
+run-name: Build and Test
 on: [push]
 
 jobs:
@@ -13,6 +13,12 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+          cache: maven
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
+      - run: mkdir staging && cp target/*.jar staging
+        uses: mkdir staging && cp target/*.jar staging
+        with:
+          name: Package
+          path: staging
 
