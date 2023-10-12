@@ -24,7 +24,3 @@ jobs:
         with:
           name: Package
           path: staging
-      - name: Publish to GitHub Packages
-        run: mvn --batch-mode deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
