@@ -43,3 +43,7 @@ jobs:
         with:
           name: Package
           path: staging
+      - name: Deploy to DEV
+        run: echo Placeholder for the DEV deployment
+      - name: Run acceptance tests
+        run: echo Placeholder for acceptance tests
