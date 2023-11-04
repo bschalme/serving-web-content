@@ -43,6 +43,13 @@ jobs:
         with:
           name: Package
           path: staging
+
+  deployment:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Deploy to DEV
         run: echo Placeholder for the DEV deployment
       - name: Run acceptance tests
