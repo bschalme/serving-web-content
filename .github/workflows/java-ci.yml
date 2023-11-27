@@ -48,6 +48,10 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+      id-token: write
 
     steps:
       - name: Configure AWS credentials
