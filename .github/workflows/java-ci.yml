@@ -50,6 +50,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_NUM}}:role/GitHubDeploymentRole
+          aws-region: ca-central-1
       - name: Deploy to DEV
         run: echo Placeholder for the DEV deployment
       - name: Run acceptance tests
