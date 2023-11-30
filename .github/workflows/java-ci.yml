@@ -6,6 +6,8 @@ on:
       - master
   pull_request:
     types: [opened, synchronize, reopened]
+env:
+  ECR_REPOSITORY: serving-web-content
 
 jobs:
   build:
@@ -59,6 +61,19 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_NUM }}:role/GitHubDeploymentRole
           aws-region: ca-central-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Build a docker container and push it to ECR so that it can be deployed to ECS.
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
       - name: Deploy to DEV
         run: echo Placeholder for the DEV deployment
       - name: Run acceptance tests
