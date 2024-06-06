@@ -3,3 +3,6 @@ management:
     web:
       exposure:
         include: "health,info"
+server:
+  servlet:
+    context-path: /serving-web-content
