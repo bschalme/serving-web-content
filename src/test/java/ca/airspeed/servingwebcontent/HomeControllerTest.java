@@ -1,5 +1,12 @@
 package ca.airspeed.servingwebcontent;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.startsWith;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -11,26 +18,21 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.jsoup.Jsoup.parse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
-class GreetingControllerTest {
+class HomeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void defaultGreeting() throws Exception {
+    void testHome() throws Exception {
         // When:
-        MvcResult result = mockMvc.perform(get("/greeting"))
+        MvcResult result = mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -45,23 +47,6 @@ class GreetingControllerTest {
         assertThat("Body;", body, notNullValue());
         Elements paragraphs = body.getElementsByTag("p");
         assertThat("<p> tags;", paragraphs, hasSize(greaterThan(0)));
-        assertThat("Greeting text;", paragraphs.get(0).text(), is("Hello, World!"));
-    }
-
-    @Test
-    void namedGreeting() throws Exception {
-        // When:
-        MvcResult result = mockMvc.perform(get("/greeting?name=Brian"))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        // Then:
-        String html = result.getResponse().getContentAsString();
-        Document doc = parse(html);
-        Element body = doc.body();
-        assertThat("Body;", body, notNullValue());
-        Elements paragraphs = body.getElementsByTag("p");
-        assertThat("<p> tags;", paragraphs, hasSize(greaterThan(0)));
-        assertThat("Greeting text;", paragraphs.get(0).text(), is("Hello, Brian!"));
+        assertThat("Greeting text;", paragraphs.get(0).text(), startsWith("Get your greeting"));
     }
 }
