@@ -57,7 +57,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         // Then:
         String html = result.getResponse().getContentAsString();
         Document doc = parse(html);
-        Element head = doc.head();
         Element body = doc.body();
         assertThat("Body;", body, notNullValue());
         Elements paragraphs = body.getElementsByTag("p");
