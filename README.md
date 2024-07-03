@@ -4,7 +4,7 @@ This is the exercise from the Spring Getting Started guide [Serving Web Content 
 
 # Building
 
-The usual `mvn clean install` works just fine.
+The usual `./mvnw clean install` works just fine.
 
 # Deploying
 
