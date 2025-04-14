@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bschalme_serving-web-content&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=bschalme_serving-web-content)
+
 # Serving Web Content
 
 This is the exercise from the Spring Getting Started guide [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/).
