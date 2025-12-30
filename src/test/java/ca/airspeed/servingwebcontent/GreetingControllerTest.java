@@ -45,7 +45,7 @@ class GreetingControllerTest {
         assertThat("Body;", body, notNullValue());
         Elements paragraphs = body.getElementsByTag("p");
         assertThat("<p> tags;", paragraphs, hasSize(greaterThan(0)));
-        assertThat("Greeting text;", paragraphs.get(0).text(), is("Salutations, World!"));
+        assertThat("Greeting text;", paragraphs.get(0).text(), is("Hello, World!"));
     }
 
     @Test
@@ -62,6 +62,6 @@ class GreetingControllerTest {
         assertThat("Body;", body, notNullValue());
         Elements paragraphs = body.getElementsByTag("p");
         assertThat("<p> tags;", paragraphs, hasSize(greaterThan(0)));
-        assertThat("Greeting text;", paragraphs.get(0).text(), is("Salutations, Brian!"));
+        assertThat("Greeting text;", paragraphs.get(0).text(), is("Hello, Brian!"));
     }
 }
